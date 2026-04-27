@@ -1,94 +1,25 @@
-<!-- Top Navigation Bar -->
 <nav class="top-navbar">
   <div class="navbar-container">
-    <!-- Navigation Links - Centered -->
     <ul class="nav-links">
-      <li>
-        <a
-          routerLink="/"
-          fragment="home"
-          [class.active]="activeSection() === 'home'"
-          (click)="closeMenu()"
-        >
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z" fill="currentColor" />
-          </svg>
-          <span>Home</span>
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/"
-          fragment="about"
-          [class.active]="activeSection() === 'about'"
-          (click)="closeMenu()"
-        >
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"
-              fill="currentColor"
-            />
-          </svg>
-          <span>About</span>
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/"
-          fragment="projects"
-          [class.active]="activeSection() === 'projects'"
-          (click)="closeMenu()"
-        >
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M20 6H12L10 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6Z"
-              fill="currentColor"
-            />
-          </svg>
-          <span>Projects</span>
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/"
-          fragment="contact"
-          [class.active]="activeSection() === 'contact'"
-          (click)="closeMenu()"
-        >
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
-              fill="currentColor"
-            />
-          </svg>
-          <span>Contact</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/blog" [class.active]="activeSection() === 'blog'" (click)="closeMenu()">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM16 18H8V16H16V18ZM16 14H8V12H16V14ZM13 9V3.5L18.5 9H13Z"
-              fill="currentColor"
-            />
-          </svg>
-          <span>Blog</span>
-        </a>
-      </li>
+      <li><a routerLink="/" fragment="home" [class.active]="activeSection() === 'home'" (click)="closeMenu()"><span>Home</span></a></li>
+      <li><a routerLink="/" fragment="about" [class.active]="activeSection() === 'about'" (click)="closeMenu()"><span>About</span></a></li>
+      <li><a routerLink="/" fragment="skills" [class.active]="activeSection() === 'skills'" (click)="closeMenu()"><span>Skills & Technologies</span></a></li>
+      <li><a routerLink="/" fragment="experience" [class.active]="activeSection() === 'experience'" (click)="closeMenu()"><span>Professional Experience</span></a></li>
+      <li><a routerLink="/" fragment="education" [class.active]="activeSection() === 'education'" (click)="closeMenu()"><span>Education & Certifications</span></a></li>
+      <li><a routerLink="/" fragment="projects" [class.active]="activeSection() === 'projects'" (click)="closeMenu()"><span>Projects</span></a></li>
+      <li><a routerLink="/" fragment="blog" [class.active]="activeSection() === 'blog'" (click)="closeMenu()"><span>Blog</span></a></li>
+      <li><a routerLink="/" fragment="contact" [class.active]="activeSection() === 'contact'" (click)="closeMenu()"><span>Contact</span></a></li>
     </ul>
 
-    <!-- Theme Toggle - Right Aligned -->
     <div class="navbar-actions">
       <button
         class="theme-toggle"
         (click)="toggleTheme()"
-        [attr.aria-label]="
-          themeService.currentTheme() === 'light' ? 'Switch to dark mode' : 'Switch to light mode'
-        "
+        title="Toggle theme"
+        [attr.aria-label]="themeService.currentTheme() === 'light' ? 'Switch to dark mode' : 'Switch to light mode'"
       >
         <span class="theme-toggle-track">
           <span class="theme-toggle-thumb">
-            <!-- Sun Icon (Light Mode) -->
             <svg
               *ngIf="themeService.currentTheme() === 'light'"
               class="theme-icon sun-icon"
@@ -104,7 +35,6 @@
                 stroke-linecap="round"
               />
             </svg>
-            <!-- Moon Icon (Dark Mode) -->
             <svg
               *ngIf="themeService.currentTheme() === 'dark'"
               class="theme-icon moon-icon"
@@ -119,13 +49,7 @@
       </button>
     </div>
 
-    <!-- Mobile Menu Toggle -->
-    <button
-      class="mobile-toggle"
-      (click)="toggleMenu()"
-      [attr.aria-expanded]="isMenuOpen()"
-      aria-label="Toggle navigation menu"
-    >
+    <button class="mobile-toggle" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen()" aria-label="Toggle navigation menu">
       <span class="hamburger" [class.active]="isMenuOpen()">
         <span></span>
         <span></span>
@@ -134,57 +58,18 @@
     </button>
   </div>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu" [class.open]="isMenuOpen()">
     <ul class="mobile-nav-links">
-      <li>
-        <a
-          routerLink="/"
-          fragment="home"
-          [class.active]="activeSection() === 'home'"
-          (click)="closeMenu()"
-        >
-          Home
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/"
-          fragment="about"
-          [class.active]="activeSection() === 'about'"
-          (click)="closeMenu()"
-        >
-          About
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/"
-          fragment="projects"
-          [class.active]="activeSection() === 'projects'"
-          (click)="closeMenu()"
-        >
-          Projects
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/"
-          fragment="contact"
-          [class.active]="activeSection() === 'contact'"
-          (click)="closeMenu()"
-        >
-          Contact
-        </a>
-      </li>
-      <li>
-        <a routerLink="/blog" [class.active]="activeSection() === 'blog'" (click)="closeMenu()">
-          Blog
-        </a>
-      </li>
+      <li><a routerLink="/" fragment="home" [class.active]="activeSection() === 'home'" (click)="closeMenu()">Home</a></li>
+      <li><a routerLink="/" fragment="about" [class.active]="activeSection() === 'about'" (click)="closeMenu()">About</a></li>
+      <li><a routerLink="/" fragment="skills" [class.active]="activeSection() === 'skills'" (click)="closeMenu()">Skills & Technologies</a></li>
+      <li><a routerLink="/" fragment="experience" [class.active]="activeSection() === 'experience'" (click)="closeMenu()">Professional Experience</a></li>
+      <li><a routerLink="/" fragment="education" [class.active]="activeSection() === 'education'" (click)="closeMenu()">Education & Certifications</a></li>
+      <li><a routerLink="/" fragment="projects" [class.active]="activeSection() === 'projects'" (click)="closeMenu()">Projects</a></li>
+      <li><a routerLink="/" fragment="blog" [class.active]="activeSection() === 'blog'" (click)="closeMenu()">Blog</a></li>
+      <li><a routerLink="/" fragment="contact" [class.active]="activeSection() === 'contact'" (click)="closeMenu()">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- Overlay for mobile -->
 <div class="navbar-overlay" [class.active]="isMenuOpen()" (click)="closeMenu()"></div>

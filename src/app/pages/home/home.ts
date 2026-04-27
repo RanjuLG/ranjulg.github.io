@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AnalyticsService } from '../../services/analytics.service';
-import { SeoService } from '../../services/seo.service';
 
 import { PROFILE_CONFIG } from '../../config/profile.config';
 
@@ -38,15 +37,8 @@ export class HomeComponent {
   ];
 
   constructor(
-    private analyticsService: AnalyticsService,
-    private seoService: SeoService
-  ) {
-    this.seoService.updateMetaTags({
-      title: 'Home',
-      description: 'Full-Stack Developer specializing in .NET and Angular. Building exceptional digital experiences.',
-      slug: ''
-    });
-  }
+    private analyticsService: AnalyticsService
+  ) {}
 
   trackResumeDownload() {
     this.analyticsService.trackEvent('Engagement', 'Click', 'Download Resume (Home)');

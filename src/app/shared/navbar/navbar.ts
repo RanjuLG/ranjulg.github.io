@@ -1,5 +1,5 @@
-import { Component, signal, HostListener, OnInit, Inject, PLATFORM_ID, ChangeDetectionStrategy } from '@angular/core';
-import { RouterLink, ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Component, signal, HostListener, Inject, PLATFORM_ID, ChangeDetectionStrategy } from '@angular/core';
+import { RouterLink, Router, NavigationEnd } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { ThemeService } from '../../services/theme.service';
@@ -54,7 +54,7 @@ export class NavbarComponent {
       return;
     }
 
-    const sections = ['home', 'about', 'projects', 'contact'];
+    const sections = ['home', 'about', 'skills', 'experience', 'education', 'projects', 'blog', 'contact'];
     const scrollPosition = window.scrollY + 100; // Offset for navbar
 
     for (const section of sections) {

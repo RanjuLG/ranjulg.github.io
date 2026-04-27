@@ -2,7 +2,6 @@ import { Component, OnInit, signal, ChangeDetectionStrategy } from '@angular/cor
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProjectsService, Project } from '../../services/projects.service';
-import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-projects',
@@ -18,15 +17,8 @@ export class ProjectsComponent implements OnInit {
 
   constructor(
     private projectsService: ProjectsService,
-    private router: Router,
-    private seoService: SeoService
-  ) {
-    this.seoService.updateMetaTags({
-      title: 'Projects',
-      description: 'Explore my latest projects and case studies demonstrating my technical skills.',
-      slug: 'projects'
-    });
-  }
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadProjects();

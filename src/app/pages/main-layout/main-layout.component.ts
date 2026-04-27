@@ -1,23 +1,45 @@
 import { Component } from '@angular/core';
 import { HomeComponent } from '../home/home';
 import { AboutComponent } from '../about/about';
+import { SkillsTechnologiesComponent } from '../skills-technologies/skills-technologies';
+import { ProfessionalExperienceComponent } from '../professional-experience/professional-experience';
+import { EducationCertificationsComponent } from '../education-certifications/education-certifications';
 import { ProjectsComponent } from '../projects/projects';
+import { BlogComponent } from '../blog/blog.component';
 import { ContactComponent } from '../contact/contact';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [HomeComponent, AboutComponent, ProjectsComponent, ContactComponent],
+  imports: [
+    HomeComponent,
+    AboutComponent,
+    SkillsTechnologiesComponent,
+    ProfessionalExperienceComponent,
+    EducationCertificationsComponent,
+    ProjectsComponent,
+    BlogComponent,
+    ContactComponent
+  ],
   template: `
     <section id="home">
       <app-home></app-home>
     </section>
 
     <section id="about">
-      @defer (on viewport) {
-        <app-about></app-about>
-      } @placeholder {
-        <div class="section-placeholder">Loading About...</div>
-      }
+      <app-about></app-about>
+    </section>
+
+    <section id="skills">
+      <app-skills-technologies></app-skills-technologies>
+    </section>
+
+    <section id="experience">
+      <app-professional-experience></app-professional-experience>
+    </section>
+
+    <section id="education">
+      <app-education-certifications></app-education-certifications>
     </section>
 
     <section id="projects">
@@ -25,6 +47,14 @@ import { ContactComponent } from '../contact/contact';
         <app-projects></app-projects>
       } @placeholder {
         <div class="section-placeholder">Loading Projects...</div>
+      }
+    </section>
+
+    <section id="blog">
+      @defer (on viewport) {
+        <app-blog></app-blog>
+      } @placeholder {
+        <div class="section-placeholder">Loading Blog...</div>
       }
     </section>
 
@@ -59,4 +89,12 @@ import { ContactComponent } from '../contact/contact';
     }
   `]
 })
-export class MainLayoutComponent {}
+export class MainLayoutComponent {
+  constructor(private seoService: SeoService) {
+    this.seoService.updateMetaTags({
+      title: 'Senior Software Engineer Portfolio',
+      description: 'Senior Software Engineer portfolio featuring about, skills, professional experience, projects, blog, and contact details.',
+      slug: ''
+    });
+  }
+}

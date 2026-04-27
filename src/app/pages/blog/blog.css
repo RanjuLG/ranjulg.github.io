@@ -1,8 +1,7 @@
 .blog-container {
-  padding: 2rem;
+  padding: var(--spacing-2xl) var(--spacing-lg);
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 80px; /* Account for fixed navbar if needed */
 }
 
 .blog-header {
@@ -10,8 +9,8 @@
   margin-bottom: 3rem;
 }
 
-.blog-header h1 {
-  font-size: 3rem;
+.blog-header h2 {
+  font-size: var(--text-5xl);
   margin-bottom: 0.5rem;
   color: var(--text-primary);
 }
@@ -56,11 +55,12 @@
 }
 
 .blog-card {
-  background: var(--bg-secondary);
-  border-radius: 12px;
+  background: var(--white);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
 }
 
 .blog-card:hover {
@@ -144,7 +144,7 @@
 }
 
 .read-more {
-  color: var(--primary-color);
+  color: var(--primary);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -158,8 +158,8 @@
 }
 
 @media (max-width: 768px) {
-  .blog-header h1 {
-    font-size: 2.5rem;
+  .blog-header h2 {
+    font-size: var(--text-4xl);
   }
   
   .blog-grid {

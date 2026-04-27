@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SeoService } from '../../services/seo.service';
 import { PROFILE_CONFIG } from '../../config/profile.config';
 
 @Component({
@@ -26,15 +25,8 @@ export class ContactComponent {
   protected readonly availability = PROFILE_CONFIG.availability;
 
   constructor(
-    private fb: FormBuilder,
-    private seoService: SeoService
+    private fb: FormBuilder
   ) {
-    this.seoService.updateMetaTags({
-      title: 'Contact',
-      description: 'Get in touch with me for collaboration opportunities or just to say hi.',
-      slug: 'contact'
-    });
-
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],

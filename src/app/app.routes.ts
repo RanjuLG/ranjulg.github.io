@@ -11,6 +11,21 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'skills',
+    redirectTo: '/#skills',
+    pathMatch: 'full'
+  },
+  {
+    path: 'experience',
+    redirectTo: '/#experience',
+    pathMatch: 'full'
+  },
+  {
+    path: 'education',
+    redirectTo: '/#education',
+    pathMatch: 'full'
+  },
+  {
     path: 'projects/:id',
     loadComponent: () => import('./pages/project-detail/project-detail').then(m => m.ProjectDetailComponent)
   },

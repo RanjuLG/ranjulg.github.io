@@ -4,8 +4,12 @@
 }
 
 .projects-header {
-  background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
+  background: var(--bg-primary);
   padding-top: var(--spacing-3xl);
+}
+
+.projects-content {
+  background: var(--bg-primary);
 }
 
 .section-header {

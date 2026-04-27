@@ -29,12 +29,12 @@
   --accent-dark: #0d9488;
 
   /* Gradients - Electric Blue Theme */
-  --gradient-primary: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
-  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --gradient-accent: linear-gradient(135deg, #007BFF 0%, #00d4ff 100%);
-  --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-  --gradient-cool: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
-  --gradient-hero: linear-gradient(135deg, #007BFF 0%, #0056b3 50%, #f093fb 100%);
+  --gradient-primary: var(--primary);
+  --gradient-secondary: var(--secondary);
+  --gradient-accent: var(--accent);
+  --gradient-warm: var(--secondary);
+  --gradient-cool: var(--primary);
+  --gradient-hero: var(--primary);
 
   /* Neutrals */
   --white: #ffffff;
@@ -166,12 +166,12 @@
   --green-600: #22c55e;
 
   /* Gradients - Dark Mode */
-  --gradient-primary: linear-gradient(135deg, #69C3FF 0%, #3395ff 100%);
-  --gradient-secondary: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
-  --gradient-accent: linear-gradient(135deg, #69C3FF 0%, #00d4ff 100%);
-  --gradient-warm: linear-gradient(135deg, #fb7185 0%, #fcd34d 100%);
-  --gradient-cool: linear-gradient(135deg, #69C3FF 0%, #3395ff 100%);
-  --gradient-hero: linear-gradient(135deg, #69C3FF 0%, #3395ff 50%, #f472b6 100%);
+  --gradient-primary: var(--primary);
+  --gradient-secondary: var(--secondary);
+  --gradient-accent: var(--accent);
+  --gradient-warm: var(--secondary);
+  --gradient-cool: var(--primary);
+  --gradient-hero: var(--primary);
 
   /* Shadows - Dark Mode */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
@@ -277,10 +277,7 @@ a:hover {
 
 /* Text Utilities */
 .text-gradient {
-  background: var(--gradient-hero);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
 }
 
 .text-center {
@@ -496,19 +493,25 @@ a:hover {
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
+  animation: none;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.6s ease-out;
+  animation: none;
 }
 
 .animate-slide-in-left {
-  animation: slideInLeft 0.6s ease-out;
+  animation: none;
 }
 
 .animate-slide-in-right {
-  animation: slideInRight 0.6s ease-out;
+  animation: none;
+}
+
+[data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
 }
 
 /* ========================================
