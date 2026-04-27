@@ -1,0 +1,60 @@
+<section class="experience-section section" aria-labelledby="experience-heading">
+  <div class="container">
+    <header class="section-heading">
+      <p class="section-kicker">Career Journey</p>
+      <h2 id="experience-heading" class="section-title">Professional Experience</h2>
+    </header>
+
+    <div class="experience-timeline">
+      @for (item of experience; track item.role + item.duration) {
+      <div class="timeline-row">
+        <div class="year-column">
+          <span class="year-label">{{ getYearLabel(item) }}</span>
+          <span class="timeline-dot" aria-hidden="true"></span>
+        </div>
+
+        <article class="experience-card card">
+          <div class="experience-head">
+            <div class="role-block">
+              <h3 class="role">{{ item.role }}</h3>
+              <p class="company">{{ item.company }}</p>
+            </div>
+
+            <div class="meta">
+              <span class="meta-chip">{{ formatDuration(item) }}</span>
+              <span class="meta-chip">{{ item.location }}</span>
+              @if (item.isCurrent) {
+              <span class="meta-chip current">Current</span>
+              }
+            </div>
+          </div>
+
+          <p class="summary">{{ item.summary }}</p>
+
+          <div class="stack">
+            @for (tech of item.technologies; track tech) {
+            <span class="stack-tag">{{ tech }}</span>
+            }
+          </div>
+
+          <div class="details-grid">
+            <section class="detail-block">
+              <h4>Key Responsibilities</h4>
+              <ul>
+                <li *ngFor="let line of item.responsibilities">{{ line }}</li>
+              </ul>
+            </section>
+
+            <section class="detail-block">
+              <h4>Key Achievements</h4>
+              <ul>
+                <li *ngFor="let line of item.achievements">{{ line }}</li>
+              </ul>
+            </section>
+          </div>
+        </article>
+      </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+<section class="education-section section-sm" aria-labelledby="education-heading">
+  <div class="container">
+    <header class="section-heading">
+      <p class="section-kicker">Academic Background</p>
+      <h2 id="education-heading" class="section-title">Education & Certifications</h2>
+    </header>
+
+    <div class="education-timeline">
+      @for (item of education; track item.title + item.duration) {
+      <article class="education-card card">
+        <div class="education-main">
+          <h3 class="education-title">{{ item.title }}</h3>
+          <span class="education-duration">{{ item.duration }}</span>
+        </div>
+
+        <p class="education-institution">{{ item.institution }}</p>
+
+        @if (item.details) {
+        <p class="education-details">{{ item.details }}</p>
+        }
+      </article>
+      }
+    </div>
+  </div>
+</section>
