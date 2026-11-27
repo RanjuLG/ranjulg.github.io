@@ -1,4 +1,5 @@
-name: Build and Publish to release branch
+
+name: Build and Publish to GitHub Pages
 
 on:
   push:
@@ -6,42 +7,60 @@ on:
       - main
   workflow_dispatch:
 
-# grant write permission so the workflow can push to the release branch using GITHUB_TOKEN
 permissions:
   contents: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Compute repo name (for base-href)
-        id: repo
-        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
-
-      - name: Build Angular (production) with correct base-href
+      - name: Compute GitHub Pages base-href
         run: |
-          echo "Building for repo: $REPO_NAME"
-          npm run build -- --configuration production --output-path=dist/portfolio --base-href "/"
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          OWNER="${GITHUB_REPOSITORY_OWNER}"
+
+          if [ "$REPO_NAME" = "$OWNER.github.io" ]; then
+            BASE_HREF="/"
+          else
+            BASE_HREF="/${REPO_NAME}/"
+          fi
+
+          echo "BASE_HREF=$BASE_HREF" >> $GITHUB_ENV
+          echo "Deploying with base-href: $BASE_HREF"
+
+      - name: Build Angular (production)
+        run: |
+          npm run build -- \
+            --configuration production \
+            --output-path=dist/portfolio \
+            --base-href "$BASE_HREF"
+
+      - name: Verify Angular build
+        run: |
+          if [ ! -f "dist/portfolio/browser/index.html" ]; then
+            echo "Angular build output not found."
+            find dist -maxdepth 4 -type f | head -100
+            exit 1
+          fi
 
       - name: Deploy to release branch
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           publish_dir: ./dist/portfolio/browser
           publish_branch: release
-          commit_message: 'chore(publish): deploy from GitHub Actions (${GITHUB_SHA})'
+          force_orphan: true
+          commit_message: "chore(publish): deploy portfolio ${{ github.sha }}"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          cname: www.ranjugamage.dev
