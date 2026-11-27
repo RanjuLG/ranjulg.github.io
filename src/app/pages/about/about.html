@@ -1,0 +1,136 @@
+<div class="about-page">
+  <!-- Page Header -->
+  <section class="about-header section-sm">
+    <div class="container">
+      <div class="page-header" data-aos="fade-down">
+        <h1 class="page-title">About</h1>
+        <p class="page-caption">Professional experience, education &amp; technical skill set</p>
+      </div>
+
+      <!-- Overview 2-Column Grid (Ryder style) -->
+      <div class="cv-overview-grid">
+        <div class="cv-bio-card">
+          <div class="bio-header">
+            <img src="me.webp" [alt]="config.personal.name" class="cv-avatar" width="100" height="100" />
+            <div>
+              <h2 class="cv-name">{{ config.personal.name }}</h2>
+              <p class="cv-role">{{ config.personal.role }}</p>
+              <p class="cv-location">📍 {{ config.personal.location }}</p>
+            </div>
+          </div>
+          <p class="cv-bio-text" [innerHTML]="introduction"></p>
+        </div>
+
+        <div class="cv-meta-card">
+          <h3 class="meta-title">Quick Information</h3>
+          <hr class="hairline-divider" />
+          <ul class="meta-list">
+            <li><strong>Degree:</strong> BSc (Eng) Hons, MSc (Reading)</li>
+            <li><strong>Email:</strong> <a [href]="'mailto:' + config.personal.email">{{ config.personal.email }}</a></li>
+            <li><strong>GitHub:</strong> <a [href]="config.social.github" target="_blank" rel="noopener">github.com/RanjuLG</a></li>
+            <li><strong>LinkedIn:</strong> <a [href]="config.social.linkedin" target="_blank" rel="noopener">linkedin.com/in/ranju-laksahan</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Professional Experience -->
+  <section class="cv-section section-sm">
+    <div class="container">
+      <h2 class="section-heading">Professional Experience</h2>
+      <hr class="hairline-divider" />
+
+      <div class="experience-list">
+        @for (item of experience; track item.title + item.duration; let idx = $index) {
+        <div class="experience-card" data-aos="fade-up">
+          <div class="exp-header">
+            <div class="exp-title-group">
+              @if (item.logo) {
+              <img [src]="item.logo" [alt]="item.logoAlt || item.subtitle" class="company-logo" loading="lazy" />
+              }
+              <div>
+                <h3 class="exp-role">{{ item.title }}</h3>
+                <h4 class="exp-company">{{ item.subtitle }}</h4>
+                @if (item.assignment) {
+                <span class="exp-assignment">({{ item.assignment }})</span>
+                }
+              </div>
+            </div>
+
+            <div class="exp-meta">
+              <span class="exp-duration">{{ formatDuration(item) }}</span>
+              @if (item.location) {
+              <span class="exp-location">{{ item.location }}</span>
+              }
+            </div>
+          </div>
+
+          <p class="exp-desc">{{ item.description }}</p>
+
+          @if (item.details && item.details.length > 0) {
+          <ul class="square-list exp-details-list">
+            @for (detail of item.details; track detail) {
+            <li>{{ detail }}</li>
+            }
+          </ul>
+          }
+
+          @if (item.technologies && item.technologies.length > 0) {
+          <div class="exp-tech-pills">
+            @for (tech of item.technologies; track tech) {
+            <span class="tech-pill">{{ tech }}</span>
+            }
+          </div>
+          }
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="cv-section section-sm">
+    <div class="container">
+      <h2 class="section-heading">Education</h2>
+      <hr class="hairline-divider" />
+
+      <div class="education-grid">
+        @for (item of education; track item.title + item.duration) {
+        <div class="education-card" data-aos="fade-up">
+          <div class="edu-header">
+            <h3 class="edu-degree">{{ item.title }}</h3>
+            <span class="edu-duration">{{ item.duration }}</span>
+          </div>
+          <h4 class="edu-institution">{{ item.subtitle }}</h4>
+          @if (item.description) {
+          <p class="edu-desc">{{ item.description }}</p>
+          }
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills & Technologies -->
+  <section class="cv-section section-sm">
+    <div class="container">
+      <h2 class="section-heading">Skills &amp; Technologies</h2>
+      <hr class="hairline-divider" />
+
+      <div class="skills-grid">
+        @for (group of skills; track group.category) {
+        <div class="skill-category-card">
+          <h3 class="skill-category-name">{{ group.category }}</h3>
+          <div class="skill-tags">
+            @for (item of group.items; track item) {
+            <span class="tech-pill">{{ item }}</span>
+            }
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+</div>

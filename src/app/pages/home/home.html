@@ -1,0 +1,96 @@
+<div class="home-page">
+  <div class="container home-container">
+    <div class="home-grid">
+      <!-- Column 1: Profile & Bio -->
+      <div class="home-col profile-col">
+        <div class="profile-avatar-wrap">
+          <img
+            [src]="photoUrl"
+            [alt]="config.personal.name"
+            class="profile-avatar"
+            width="170"
+            height="170"
+          />
+        </div>
+
+        <h1 class="profile-name">{{ config.personal.name }}</h1>
+        <p class="profile-role">{{ config.personal.role }}</p>
+        <p class="profile-degrees">{{ degrees }}</p>
+
+        <p class="profile-bio">{{ bio }}</p>
+
+        <!-- Social Badges Grid (Ryder Cragie style) -->
+        <div class="social-tiles">
+          @for (link of socialLinks; track link.name) {
+          <a
+            [href]="link.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="link.name"
+            class="social-tile"
+            [style.background-color]="link.bgColor"
+          >
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="social-tile-icon">
+              <path [attr.d]="link.icon" fill="#ffffff" />
+            </svg>
+          </a>
+          }
+        </div>
+
+        <!-- Quick actions -->
+        <div class="profile-actions">
+          <a routerLink="/projects" class="btn btn-flat">Projects</a>
+          <a routerLink="/blog" class="btn btn-flat">Articles</a>
+        </div>
+      </div>
+
+      <!-- Column 2: Interests & Focus -->
+      <div class="home-col">
+        <h2 class="col-title">Interests & Focus</h2>
+        <hr class="hairline-divider" />
+        <ul class="emoji-list">
+          @for (item of interests; track item.label) {
+          <li class="emoji-item">
+            <span class="item-emoji">{{ item.icon }}</span>
+            <span class="item-label">{{ item.label }}</span>
+          </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Column 3: Skills & Stack -->
+      <div class="home-col">
+        <h2 class="col-title">Skills & Stack</h2>
+        <hr class="hairline-divider" />
+        <ul class="emoji-list">
+          @for (item of skills; track item.label) {
+          <li class="emoji-item">
+            <span class="item-emoji">{{ item.icon }}</span>
+            <span class="item-label">{{ item.label }}</span>
+          </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Column 4: Career Highlights -->
+      <div class="home-col">
+        <h2 class="col-title">Career</h2>
+        <hr class="hairline-divider" />
+        <ul class="square-list career-list">
+          @for (item of career; track item.role + item.company) {
+          <li class="career-item">
+            <strong class="career-role">{{ item.role }}</strong>
+            <div class="career-company">{{ item.company }}</div>
+            <div class="career-period">{{ item.period }}</div>
+          </li>
+          }
+        </ul>
+        <div class="col-footer-link">
+          <a routerLink="/about" class="more-link">
+            Full experience &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+/* ========================================
+   FOOTER - RYDER CRAGIE SIGNATURE STYLE
+   ======================================== */
+
+.footer {
+  padding: 2.5rem 0 3rem;
+  background: var(--bg-primary);
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.back-to-top-wrap {
+  padding: 0.85rem 0;
+}
+
+.back-to-top-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.back-to-top-link:hover {
+  color: var(--primary);
+  opacity: 0.85;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 1rem;
+}
+
+.footer-social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.footer-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  opacity: 0.75;
+  transition: opacity var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
+}
+
+.footer-icon-link:hover {
+  opacity: 1;
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.footer-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.copyright {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}

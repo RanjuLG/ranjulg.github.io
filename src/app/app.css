@@ -1,0 +1,7 @@
+.main-content {
+  min-height: calc(100vh - 58px);
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+  /* No padding-top needed: navbar is position:sticky, not fixed */
+}

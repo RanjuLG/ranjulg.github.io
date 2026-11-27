@@ -1,0 +1,131 @@
+<div class="projects-page">
+  <section class="projects-header section-sm">
+    <div class="container">
+      <div class="page-header" data-aos="fade-down">
+        <h1 class="page-title">Projects</h1>
+        <p class="page-caption">Featured applications, enterprise systems &amp; open-source projects</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects-content">
+    <div class="container">
+      @if (loading()) {
+      <div class="loading-state">
+        <div class="loader"></div>
+        <p>Loading projects...</p>
+      </div>
+      } @else if (error()) {
+      <div class="error-state card">
+        <svg
+          width="48"
+          height="48"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"
+            fill="#ef4444"
+          />
+        </svg>
+        <h3>Something went wrong</h3>
+        <p>{{ error() }}</p>
+      </div>
+      } @else if (projects().length === 0) {
+      <div class="empty-state card">
+        <h3>No projects found</h3>
+        <p>Check back later for new projects.</p>
+      </div>
+      } @else {
+      <div class="projects-grid">
+        @for (project of projects(); track project.id) {
+        <div
+          class="project-card"
+          (click)="viewProject(project.id)"
+          data-aos="fade-up"
+          [attr.data-aos-delay]="80 * $index"
+        >
+          <!-- Thumbnail Frame -->
+          <div class="project-thumbnail-wrap">
+            @if (project.thumbnailUrl) {
+            <img
+              [src]="getImageUrl(project.thumbnailUrl)"
+              [alt]="project.name"
+              class="project-thumbnail"
+              loading="lazy"
+            />
+            } @else {
+            <div class="project-placeholder">
+              <span>{{ project.name }}</span>
+            </div>
+            }
+          </div>
+
+          <!-- Project Details -->
+          <div class="project-info">
+            <div class="project-header-row">
+              <h3 class="project-name">{{ project.name }}</h3>
+              @if (project.ongoing) {
+              <span class="status-badge ongoing">Ongoing</span>
+              }
+            </div>
+
+            <p class="project-desc">{{ project.shortDescription }}</p>
+
+            <div class="project-tech-pills">
+              @for (tech of project.technologies.slice(0, 5); track tech) {
+              <span class="tech-pill">{{ tech }}</span>
+              }
+              @if (project.technologies.length > 5) {
+              <span class="tech-pill more">+{{ project.technologies.length - 5 }}</span>
+              }
+            </div>
+
+            <hr class="hairline-divider" />
+
+            <!-- Action Buttons (Ryder Cragie Flat Style) -->
+            <div class="project-actions">
+              <button class="btn btn-flat action-btn" (click)="$event.stopPropagation(); viewProject(project.id)">
+                View Details &rarr;
+              </button>
+
+              <div class="project-ext-links">
+                @if (project.githubUrlFE || project.githubUrlBE) {
+                <a
+                  [href]="project.githubUrlFE || project.githubUrlBE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="icon-btn"
+                  (click)="$event.stopPropagation()"
+                  title="Source Code"
+                >
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                  </svg>
+                </a>
+                }
+                @if (project.liveUrl) {
+                <a
+                  [href]="project.liveUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="icon-btn"
+                  (click)="$event.stopPropagation()"
+                  title="Live Demo"
+                >
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 19.93C7.05 19.44 4 16.08 4 12C4 11.38 4.08 10.79 4.21 10.21L9 15V16C9 17.1 9.9 18 11 18V19.93ZM17.9 17.39C17.64 16.58 16.9 16 16 16H15V13C15 12.45 14.55 12 14 12H8V10H10C10.55 10 11 9.55 11 9V7H13C14.1 7 15 6.1 15 5V4.59C17.93 5.78 20 8.65 20 12C20 14.08 19.2 15.97 17.9 17.39Z"/>
+                  </svg>
+                </a>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </section>
+</div>

@@ -1,0 +1,149 @@
+/* ========================================
+   ARTICLES / BLOG - RYDER CRAGIE STYLE
+   ======================================== */
+
+.blog-page {
+  padding: 2.5rem 0 4rem;
+}
+
+.search-wrap {
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast);
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.search-bar::placeholder {
+  color: var(--text-muted);
+}
+
+/* Articles List (Ryder 2-Column Row Layout) */
+.articles-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 2px solid var(--divider-color);
+}
+
+.article-row:first-child {
+  border-top: 2px solid var(--divider-color);
+}
+
+.article-info {
+  flex: 1;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.meta-date {
+  font-weight: 500;
+}
+
+.meta-dot {
+  opacity: 0.5;
+}
+
+.meta-tag {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.article-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.35rem;
+  line-height: 1.35;
+}
+
+.article-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  color: var(--primary);
+}
+
+.article-excerpt {
+  font-size: 0.925rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 800px;
+}
+
+.article-action {
+  flex-shrink: 0;
+}
+
+.read-btn {
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  height: 38px;
+}
+
+@media (max-width: 640px) {
+  .article-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .read-btn {
+    width: 100%;
+  }
+}
+
+/* Loading & Empty States */
+.loading-state,
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  margin: 2rem auto;
+  max-width: 500px;
+}
+
+.loader {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
