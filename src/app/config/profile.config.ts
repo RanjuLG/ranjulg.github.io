@@ -2,7 +2,7 @@ export const PROFILE_CONFIG = {
   personal: {
     name: 'Ranju Gamage',
     role: 'Senior Software Engineer',
-    email: 'ranju@ranjugamage.dev',
+    email: 'ranjugdev@gmail.com',
     location: 'Sri Lanka'
   },
   social: {
