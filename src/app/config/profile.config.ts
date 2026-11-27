@@ -11,7 +11,7 @@ export const PROFILE_CONFIG = {
     twitter: ''
   },
   urls: {
-    baseUrl: 'https://ranjugamage.dev'
+    baseUrl: 'https://ranjulg.github.io'
   },
   seo: {
     siteName: 'Ranju Gamage - Senior Software Engineer'

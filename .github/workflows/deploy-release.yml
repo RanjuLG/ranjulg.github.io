@@ -1,4 +1,3 @@
-
 name: Build and Publish to GitHub Pages
 
 on:
@@ -27,34 +26,45 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Compute GitHub Pages base-href
+      - name: Determine base href
         run: |
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
           OWNER="${GITHUB_REPOSITORY_OWNER}"
 
-          if [ "$REPO_NAME" = "$OWNER.github.io" ]; then
+          REPO_LOWER=$(echo "$REPO_NAME" | tr '[:upper:]' '[:lower:]')
+          OWNER_LOWER=$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')
+
+          if [ "$REPO_LOWER" = "$OWNER_LOWER.github.io" ]; then
             BASE_HREF="/"
           else
             BASE_HREF="/${REPO_NAME}/"
           fi
 
-          echo "BASE_HREF=$BASE_HREF" >> $GITHUB_ENV
+          echo "BASE_HREF=$BASE_HREF" >> "$GITHUB_ENV"
           echo "Deploying with base-href: $BASE_HREF"
 
-      - name: Build Angular (production)
+      - name: Build Angular
         run: |
-          npm run build -- \
+          npx ng build \
             --configuration production \
             --output-path=dist/portfolio \
-            --base-href "$BASE_HREF"
+            --base-href="$BASE_HREF"
 
-      - name: Verify Angular build
+      - name: Prepare GitHub Pages output
         run: |
-          if [ ! -f "dist/portfolio/browser/index.html" ]; then
-            echo "Angular build output not found."
+          OUTPUT_DIR="dist/portfolio/browser"
+
+          if [ ! -f "$OUTPUT_DIR/index.html" ]; then
+            echo "Angular build output not found!"
             find dist -maxdepth 4 -type f | head -100
             exit 1
           fi
+
+          cp "$OUTPUT_DIR/index.html" "$OUTPUT_DIR/404.html"
+          touch "$OUTPUT_DIR/.nojekyll"
+
+          echo "Checking base href in $OUTPUT_DIR/index.html:"
+          grep -o '<base href="[^"]*"' "$OUTPUT_DIR/index.html"
 
       - name: Deploy to release branch
         uses: peaceiris/actions-gh-pages@v4
@@ -62,5 +72,5 @@ jobs:
           publish_dir: ./dist/portfolio/browser
           publish_branch: release
           force_orphan: true
-          commit_message: "chore(publish): deploy portfolio ${{ github.sha }}"
+          commit_message: "Deploy portfolio ${{ github.sha }}"
           github_token: ${{ secrets.GITHUB_TOKEN }}
